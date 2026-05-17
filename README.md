@@ -65,9 +65,21 @@ Use the **Mode Editor** tab in the dashboard to edit visually — saves and rege
 | Key | Usage | Get it |
 |-----|-------|--------|
 | `ANTHROPIC_API_KEY` | Claude Haiku scorer + Claude Sonnet drafter | console.anthropic.com |
-| `SERPAPI_KEY` | Google Jobs (LinkedIn, Indeed, Glassdoor) | serpapi.com — free tier: 100 searches/month |
+| `SERPAPI_KEY` | Google Jobs aggregator (see below) | serpapi.com — free tier: 250 searches/month |
 | `USAJOBS_KEY` | USAJobs.gov API | developer.usajobs.gov — free registration |
 | `USAJOBS_EMAIL` | USAJobs.gov API (User-Agent header) | Same registration as above |
+
+---
+
+### About SerpAPI
+
+SerpAPI is a paid service that queries Google Jobs and returns structured JSON results.
+Google Jobs aggregates listings from LinkedIn, Indeed, Glassdoor, Seek, and hundreds of other boards — making SerpAPI the single highest-value source in this project.
+
+- Free tier: 250 searches/month (enough for occasional runs)
+- Paid plans start at $50/month for 5,000 searches
+- Register and get your key at: https://serpapi.com/
+- **Optional** — if no key is configured, SerpAPI and Indeed EU sources are silently skipped. All other sources still work.
 
 ---
 
