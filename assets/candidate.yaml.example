@@ -1,5 +1,10 @@
 # ============================================================
-# Candidate Profile — copy this to candidate.yaml and fill in
+# Candidate Profile
+#
+# HOW TO USE:
+#   1. Fill in your details below
+#   2. Save this file as "candidate.yaml" in the same folder (assets/)
+#   3. Do NOT rename or move it — the app looks for assets/candidate.yaml
 # ============================================================
 
 name: "Your Full Name"
