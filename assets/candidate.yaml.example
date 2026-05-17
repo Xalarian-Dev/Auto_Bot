@@ -1,0 +1,49 @@
+# ============================================================
+# Candidate Profile — copy this to candidate.yaml and fill in
+# ============================================================
+
+name: "Your Full Name"
+name_ascii: "Your Full Name"   # without accents, for PDF rendering
+email: "your.email@example.com"
+phone: "+XX X XX XX XX XX"
+linkedin: "linkedin.com/in/your-profile"
+location: "City, Country (Full Mobility)"
+
+current_title: "Your Current Job Title"
+experience_years: 10
+languages:
+  - "English (native)"
+  - "French (B2)"
+
+core_strengths:
+  - "Describe a core strength"
+  - "Another strength"
+
+key_experiences:
+  - "Job Title — Company, Year–Year"
+  - "Job Title — Company, Year–Year"
+
+education:
+  - "Degree — University, Year–Year"
+
+scorer:
+  target_roles:
+    - "Program Manager"
+    - "Program Director"
+
+  target_regions:
+    - "APAC (primary)"
+    - "North America (secondary)"
+
+  excluded_regions:
+    - "Western Europe"
+
+  work_mode: "RELOCATION only — will not accept remote-only roles."
+
+  positive_signals:
+    - "Senior/Director level titles"
+    - "Relocation support or visa sponsorship"
+
+  negative_signals:
+    - "Junior or mid-level roles"
+    - "Remote-only with no relocation path"

@@ -1,0 +1,244 @@
+# ============================================================
+# Scout Agent — Mode Profiles
+# Human-readable config. Edit here, save from the dashboard.
+# criteria.yaml is auto-generated from this file.
+# ============================================================
+
+modes:
+
+  # ============================================================
+  # MODE A — APAC
+  # ============================================================
+  A:
+    label: "APAC"
+    search_suffix: "relocation visa sponsorship"
+
+    keywords:
+      - "Program Director"
+      - "Head of PMO"
+      - "Transformation Director"
+      - "Delivery Director"
+
+    # name = used as serpapi location field and display
+    # country = used for region inference and jaabz/jobbank queries
+    # indeed_domain = only needed for Mode C (Indeed EU)
+    locations:
+      - name: "Singapore"
+        country: "Singapore"
+      - name: "Sydney, Australia"
+        country: "Australia"
+      - name: "Melbourne, Australia"
+        country: "Australia"
+      - name: "Hong Kong"
+        country: "Hong Kong"
+      - name: "Tokyo, Japan"
+        country: "Japan"
+      - name: "Ho Chi Minh City, Vietnam"
+        country: "Vietnam"
+      - name: "Bangkok, Thailand"
+        country: "Thailand"
+
+    sources:
+      serpapi: true
+      mcf: false      # MyCareersFuture — requires SingPass (Singapore citizens only)
+      jaabz: true     # Relocation-focused board
+      globaljobs: true
+      greenhouse: true
+      usajobs: false
+      jobbank: false
+      itjobboard: false
+      indeed: false
+
+    greenhouse_companies:
+      - token: "thoughtworks"
+        name: "Thoughtworks"
+      - token: "gitlab"
+        name: "GitLab"
+      - token: "airbnb"
+        name: "Airbnb"
+      - token: "databricks"
+        name: "Databricks"
+      - token: "stripe"
+        name: "Stripe"
+      - token: "elastic"
+        name: "Elastic"
+      - token: "okta"
+        name: "Okta"
+      - token: "cloudflare"
+        name: "Cloudflare"
+      - token: "datadog"
+        name: "Datadog"
+      - token: "canonical"
+        name: "Canonical"
+      - token: "figma"
+        name: "Figma"
+      - token: "anthropic"
+        name: "Anthropic"
+      - token: "riotgames"
+        name: "Riot Games"
+      - token: "epicgames"
+        name: "Epic Games"
+      - token: "contentful"
+        name: "Contentful"
+      - token: "algolia"
+        name: "Algolia"
+      - token: "braze"
+        name: "Braze"
+
+    greenhouse_title_filters:
+      - "Program Manager"
+      - "Program Director"
+      - "Project Director"
+      - "Head of PMO"
+      - "PMO"
+      - "Delivery Manager"
+      - "Delivery Director"
+      - "Engagement Manager"
+      - "Transformation"
+
+  # ============================================================
+  # MODE B — North America
+  # ============================================================
+  B:
+    label: "North America"
+    search_suffix: "relocation sponsorship"
+
+    keywords:
+      - "Program Director"
+      - "Head of PMO"
+      - "Transformation Director"
+      - "Delivery Director"
+
+    locations:
+      - name: "Toronto, Canada"
+        country: "Canada"
+      - name: "Ottawa, Canada"
+        country: "Canada"
+      - name: "Vancouver, Canada"
+        country: "Canada"
+      - name: "United States"
+        country: "United States"
+      - name: "New York, NY"
+        country: "United States"
+      - name: "San Francisco, CA"
+        country: "United States"
+      - name: "Washington, DC"
+        country: "United States"
+
+    sources:
+      serpapi: true
+      mcf: false
+      jaabz: true
+      globaljobs: true
+      greenhouse: true
+      usajobs: true   # US federal gov portal
+      jobbank: true   # Canadian gov portal
+      itjobboard: true
+      indeed: false
+
+    greenhouse_companies:
+      - token: "thoughtworks"
+        name: "Thoughtworks"
+      - token: "stripe"
+        name: "Stripe"
+      - token: "databricks"
+        name: "Databricks"
+      - token: "okta"
+        name: "Okta"
+      - token: "elastic"
+        name: "Elastic"
+      - token: "twilio"
+        name: "Twilio"
+      - token: "mongodb"
+        name: "MongoDB"
+      - token: "lyft"
+        name: "Lyft"
+      - token: "dropbox"
+        name: "Dropbox"
+      - token: "cloudflare"
+        name: "Cloudflare"
+      - token: "datadog"
+        name: "Datadog"
+      - token: "pagerduty"
+        name: "PagerDuty"
+      - token: "canonical"
+        name: "Canonical"
+      - token: "hubspotjobs"
+        name: "HubSpot"
+      - token: "figma"
+        name: "Figma"
+      - token: "anthropic"
+        name: "Anthropic"
+      - token: "robinhood"
+        name: "Robinhood"
+      - token: "riotgames"
+        name: "Riot Games"
+      - token: "epicgames"
+        name: "Epic Games"
+      - token: "braze"
+        name: "Braze"
+      - token: "klaviyo"
+        name: "Klaviyo"
+      - token: "contentful"
+        name: "Contentful"
+      - token: "algolia"
+        name: "Algolia"
+
+    greenhouse_title_filters:
+      - "Program Manager"
+      - "Program Director"
+      - "Project Director"
+      - "Head of PMO"
+      - "PMO"
+      - "Delivery Manager"
+      - "Delivery Director"
+      - "Engagement Manager"
+      - "Transformation"
+
+  # ============================================================
+  # MODE C — Northern Europe + Paris
+  # ============================================================
+  C:
+    label: "Europe (North + Paris)"
+    search_suffix: "English speaking"
+
+    keywords:
+      - "Program Director"
+      - "Head of PMO"
+      - "Transformation Director"
+      - "Delivery Director"
+
+    # indeed_domain required for Mode C (Indeed EU engine via SerpAPI)
+    locations:
+      - name: "Netherlands"
+        country: "Netherlands"
+        indeed_domain: "nl.indeed.com"
+      - name: "Sweden"
+        country: "Sweden"
+        indeed_domain: "se.indeed.com"
+      - name: "Denmark"
+        country: "Denmark"
+        indeed_domain: "dk.indeed.com"
+      - name: "Finland"
+        country: "Finland"
+        indeed_domain: "fi.indeed.com"
+      - name: "Paris, France"
+        country: "France"
+        indeed_domain: "fr.indeed.com"
+      - name: "Brussels, Belgium"
+        country: "Belgium"
+        indeed_domain: "be.indeed.com"
+
+    sources:
+      serpapi: false
+      mcf: false
+      jaabz: false
+      globaljobs: true
+      greenhouse: false
+      usajobs: false
+      jobbank: false
+      itjobboard: false
+      indeed: true    # Indeed EU via SerpAPI paid engine
+
+    greenhouse_companies: []
+    greenhouse_title_filters: []

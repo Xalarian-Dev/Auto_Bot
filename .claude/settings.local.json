@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{redirect_url}\" \"https://www.seek.com.au/api/chalice-search/v4/search?siteKey=AU-Main&keywords=program+manager&pageSize=1\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://au.seek.com/api/chalice-search/v4/search?siteKey=AU-Main&keywords=program+manager&pageSize=1\")",
+      "Bash(curl -s -w \"\\\\nHTTP: %{http_code}\" \"https://www.seek.com.au/api/chalice-search/v4/search?siteKey=AU-Main&sourcesystem=houston&keywords=program+manager&pageSize=1\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -H \"Referer: https://www.seek.com.au/\")",
+      "Bash(E:/Python/python.exe main.py --mode A --dry-run)",
+      "Bash(E:/Python/python.exe main.py --mode B --dry-run)",
+      "Bash(E:/Python/python.exe main.py --mode C --dry-run)",
+      "Bash(curl -sL 'https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=program+manager&experience=3' -H 'User-Agent: Mozilla/5.0')",
+      "Bash(.venv/Scripts/python.exe -c ':*)",
+      "WebSearch",
+      "WebFetch(domain:jaabz.com)",
+      "WebFetch(domain:www.unjobnet.org)",
+      "WebFetch(domain:jobs.managementconsulted.com)",
+      "WebFetch(domain:boards-api.greenhouse.io)",
+      "Bash(curl -s \"https://www.itjobboard.net/jobs/\")",
+      "WebFetch(domain:api.lever.co)",
+      "Bash(grep -v \"\\\\.bak$\")"
+    ]
+  }
+}

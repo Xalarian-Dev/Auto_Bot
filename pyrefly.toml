@@ -1,0 +1,4 @@
+# Pyrefly project configuration
+# Points to the local venv so Pyrefly finds all installed packages
+
+python_interpreter = ".venv/Scripts/python.exe"

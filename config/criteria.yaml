@@ -1,0 +1,356 @@
+# ============================================================
+# Scout Agent — Search Criteria
+# Organised by mode:
+#   A — APAC (Singapore, HK, AU, JP, HCMC, Bangkok, ...)
+#   B — North America (USA, Canada)
+#   C — Northern Europe + Paris, big companies only
+# ============================================================
+
+modes:
+
+  # ============================================================
+  # MODE A — APAC
+  # ============================================================
+  A:
+    label: "APAC"
+    description: "Senior Program/Project Director roles across Asia-Pacific"
+
+    serpapi_queries:
+
+      - q: "Program Director relocation visa sponsorship"
+        location: "Singapore"
+        country: "Singapore"
+        region: "APAC"
+
+      - q: "Head of PMO Singapore relocation"
+        location: "Singapore"
+        country: "Singapore"
+        region: "APAC"
+
+      - q: "Transformation Director Singapore English"
+        location: "Singapore"
+        country: "Singapore"
+        region: "APAC"
+
+      - q: "Delivery Director Singapore expat"
+        location: "Singapore"
+        country: "Singapore"
+        region: "APAC"
+
+      - q: "Program Director relocation Australia"
+        location: "Sydney, Australia"
+        country: "Australia"
+        region: "APAC"
+
+      - q: "Head of PMO Australia relocation"
+        location: "Melbourne, Australia"
+        country: "Australia"
+        region: "APAC"
+
+      - q: "Transformation Director Australia"
+        location: "Sydney, Australia"
+        country: "Australia"
+        region: "APAC"
+
+      - q: "Program Director Hong Kong English speaking"
+        location: "Hong Kong"
+        country: "Hong Kong"
+        region: "APAC"
+
+      - q: "Head of PMO Hong Kong relocation"
+        location: "Hong Kong"
+        country: "Hong Kong"
+        region: "APAC"
+
+      - q: "Program Director Japan English speaking relocation"
+        location: "Tokyo, Japan"
+        country: "Japan"
+        region: "APAC"
+
+      - q: "Program Director Ho Chi Minh City English"
+        location: "Ho Chi Minh City, Vietnam"
+        country: "Vietnam"
+        region: "APAC"
+
+      - q: "Director of Programs Bangkok relocation"
+        location: "Bangkok, Thailand"
+        country: "Thailand"
+        region: "APAC"
+
+      - q: "Head of PMO Bangkok English speaking"
+        location: "Bangkok, Thailand"
+        country: "Thailand"
+        region: "APAC"
+
+    mcf_queries:
+      - search: "Program Director"
+        max_pages: 3
+      - search: "Head of PMO"
+        max_pages: 3
+      - search: "Transformation Director"
+        max_pages: 2
+      - search: "Delivery Director"
+        max_pages: 2
+
+    # Seek and JobsDB are behind Cloudflare — covered via SerpAPI Google Jobs
+    seek_queries: []
+    jobsdb_queries: []
+
+    jaabz_queries:
+      - keyword: "Program Director"
+        location: "Singapore"
+        max_pages: 2
+      - keyword: "Program Director"
+        location: "Australia"
+        max_pages: 2
+      - keyword: "Head of PMO"
+        location: "Singapore"
+        max_pages: 2
+      - keyword: "Program Director"
+        location: "Hong Kong"
+        max_pages: 2
+      - keyword: "Program Director"
+        location: "Vietnam"
+        max_pages: 2
+      - keyword: "Program Director"
+        location: "Thailand"
+        max_pages: 2
+
+    globaljobs_queries:
+      - keyword: "Program Director"
+        region: "asia-pacific"
+        max_pages: 2
+      - keyword: "Head of PMO"
+        region: "asia-pacific"
+        max_pages: 2
+
+    greenhouse_companies:
+      - token: "tcs"
+        name: "Tata Consultancy Services"
+      - token: "thoughtworks"
+        name: "Thoughtworks"
+      - token: "gitlab"
+        name: "GitLab"
+      - token: "airbnb"
+        name: "Airbnb"
+      - token: "databricks"
+        name: "Databricks"
+      - token: "stripe"
+        name: "Stripe"
+      - token: "elastic"
+        name: "Elastic"
+      - token: "okta"
+        name: "Okta"
+    greenhouse_title_filters:
+      - "Program Manager"
+      - "Program Director"
+      - "Project Director"
+      - "Head of PMO"
+      - "PMO"
+      - "Delivery Manager"
+      - "Delivery Director"
+      - "Engagement Manager"
+      - "Transformation"
+
+  # ============================================================
+  # MODE B — North America
+  # ============================================================
+  B:
+    label: "North America"
+    description: "Senior Program/Project Director roles in USA and Canada (relocation/visa)"
+
+    serpapi_queries:
+
+      - q: "Program Director visa sponsorship relocation Canada"
+        location: "Toronto, Canada"
+        country: "Canada"
+        region: "NA"
+
+      - q: "Head of PMO Canada relocation"
+        location: "Ottawa, Canada"
+        country: "Canada"
+        region: "NA"
+
+      - q: "Transformation Director Canada"
+        location: "Vancouver, Canada"
+        country: "Canada"
+        region: "NA"
+
+      - q: "Program Director H1B visa sponsorship USA"
+        location: "United States"
+        country: "United States"
+        region: "NA"
+
+      - q: "Head of PMO USA relocation sponsorship"
+        location: "New York, NY"
+        country: "United States"
+        region: "NA"
+
+      - q: "Delivery Director transformation visa sponsored"
+        location: "San Francisco, CA"
+        country: "United States"
+        region: "NA"
+
+      - q: "Director of Programs relocation sponsorship"
+        location: "United States"
+        country: "United States"
+        region: "NA"
+
+      - q: "Program Director government consulting USA"
+        location: "Washington, DC"
+        country: "United States"
+        region: "NA"
+
+    seek_queries: []
+    mcf_queries: []
+    jobsdb_queries: []
+
+    usajobs_queries:
+      - keyword: "Program Director"
+        results_per_page: 25
+      - keyword: "Program Manager"
+        results_per_page: 25
+      - keyword: "Head of PMO"
+        results_per_page: 25
+      - keyword: "Transformation Director"
+        results_per_page: 25
+
+    jobbank_queries:
+      - keyword: "Program Director"
+        location: "Canada"
+        max_pages: 3
+      - keyword: "Head of PMO"
+        location: "Canada"
+        max_pages: 2
+      - keyword: "Delivery Director"
+        location: "Canada"
+        max_pages: 2
+
+    jaabz_queries:
+      - keyword: "Program Director"
+        location: "United States"
+        max_pages: 3
+      - keyword: "Head of PMO"
+        location: "United States"
+        max_pages: 2
+      - keyword: "Program Director"
+        location: "Canada"
+        max_pages: 2
+      - keyword: "Transformation Director"
+        location: "Canada"
+        max_pages: 2
+
+    globaljobs_queries:
+      - keyword: "Program Director"
+        region: "north-america"
+        max_pages: 2
+      - keyword: "Head of PMO"
+        region: "north-america"
+        max_pages: 2
+
+    greenhouse_companies:
+      - token: "tcs"
+        name: "Tata Consultancy Services"
+      - token: "thoughtworks"
+        name: "Thoughtworks"
+      - token: "stripe"
+        name: "Stripe"
+      - token: "databricks"
+        name: "Databricks"
+      - token: "okta"
+        name: "Okta"
+      - token: "elastic"
+        name: "Elastic"
+      - token: "twilio"
+        name: "Twilio"
+      - token: "mongodb"
+        name: "MongoDB"
+      - token: "lyft"
+        name: "Lyft"
+      - token: "dropbox"
+        name: "Dropbox"
+    greenhouse_title_filters:
+      - "Program Manager"
+      - "Program Director"
+      - "Project Director"
+      - "Head of PMO"
+      - "PMO"
+      - "Delivery Manager"
+      - "Delivery Director"
+      - "Engagement Manager"
+      - "Transformation"
+
+    itjobboard_queries:
+      - keyword: "Program Director"
+        location: "United States"
+      - keyword: "Head of PMO"
+        location: "United States"
+      - keyword: "Delivery Director"
+        location: "United States"
+
+  # ============================================================
+  # MODE C — Northern Europe + Paris, big companies only
+  # ============================================================
+  C:
+    label: "Europe (North + Paris)"
+    description: "Senior Program/Project Director at large companies in Northern Europe or Paris"
+
+    # Google Jobs has no EU coverage — serpapi_queries unused for Mode C
+    serpapi_queries: []
+
+    globaljobs_queries:
+      - keyword: "Program Director"
+        region: "europe"
+        max_pages: 2
+      - keyword: "Head of PMO"
+        region: "europe"
+        max_pages: 2
+
+    # Indeed EU queries via SerpAPI (engine: indeed)
+    indeed_queries:
+
+      - q: "Program Director"
+        location: "Netherlands"
+        country: "Netherlands"
+        domain: "nl.indeed.com"
+        region: "OTHER"
+
+      - q: "Head of PMO"
+        location: "Sweden"
+        country: "Sweden"
+        domain: "se.indeed.com"
+        region: "OTHER"
+
+      - q: "Program Director"
+        location: "Denmark"
+        country: "Denmark"
+        domain: "dk.indeed.com"
+        region: "OTHER"
+
+      - q: "Transformation Director"
+        location: "Finland"
+        country: "Finland"
+        domain: "fi.indeed.com"
+        region: "OTHER"
+
+      - q: "Program Director English"
+        location: "Paris"
+        country: "France"
+        domain: "fr.indeed.com"
+        region: "OTHER"
+
+      - q: "Head of PMO"
+        location: "Paris"
+        country: "France"
+        domain: "fr.indeed.com"
+        region: "OTHER"
+
+      - q: "Program Director"
+        location: "Brussels"
+        country: "Belgium"
+        domain: "be.indeed.com"
+        region: "OTHER"
+
+    seek_queries: []
+    mcf_queries: []
+    jobsdb_queries: []

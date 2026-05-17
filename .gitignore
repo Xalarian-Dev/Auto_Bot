@@ -1,0 +1,23 @@
+# Environment
+.env
+
+# Candidate personal data — never commit
+assets/candidate.yaml
+assets/*.pdf
+
+# Database
+data/
+
+# Output files
+output/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Config backup and editor temp files
+config/criteria.yaml.bak
+*.tmp.*
