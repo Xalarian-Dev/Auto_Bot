@@ -17,7 +17,7 @@ from rich import box
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-from scout.db import upsert_listing, update_score, get_stats, get_top_listings, get_all_modes
+from scout.db import upsert_listing, update_score, get_unscored, get_stats, get_top_listings, get_all_modes
 from scout.models import JobListing, Region
 from scout.scorer import Scorer
 from scout.sources.base import infer_region
@@ -161,16 +161,26 @@ def run_scout(
 
     console.print(f"[green]New:[/] {len(new_listings)}  [dim]Already known: {skipped}[/]")
 
-    # --------------------------------------------------------------- Score new listings
-    if new_listings:
+    # ------------------------------------------- Score new + still-unscored listings
+    # Includes listings saved in an earlier run but never scored (crash, missing
+    # key, API failure), so nothing stays "unscored" forever.
+    pending = get_unscored(db_path, scout_mode=mode)
+    if pending:
         if not os.getenv("ANTHROPIC_API_KEY"):
-            console.print("[yellow]ANTHROPIC_API_KEY not set -- skipping scoring.")
+            console.print(
+                f"[yellow]ANTHROPIC_API_KEY not set -- {len(pending)} listing(s) left unscored "
+                "(they will be scored at the next run with a valid key)."
+            )
         else:
-            console.print(f"\n[cyan]Scoring {len(new_listings)} new listings with Claude...")
+            console.print(f"\n[cyan]Scoring {len(pending)} unscored listings with Claude...")
             scorer = Scorer()
-            scored = scorer.score_batch(new_listings)
+            failed = 0
 
-            for listing, result in scored:
+            for listing in pending:
+                result = scorer.score(listing)
+                if result is None:
+                    failed += 1
+                    continue
                 update_score(
                     fingerprint=listing.fingerprint,
                     score=result.score,
@@ -180,7 +190,12 @@ def run_scout(
                 )
                 time.sleep(0.3)
 
-            console.print("[green]Scoring complete.[/]")
+            if failed:
+                console.print(
+                    f"[yellow]WARNING: {failed} listing(s) could not be scored and stay unscored "
+                    "(check the API key / credit / rate limit). They will be retried at the next run.[/]"
+                )
+            console.print(f"[green]Scoring complete:[/] {len(pending) - failed} scored, {failed} failed.")
 
     # ----------------------------------------------------------------- Summary
     stats = get_stats(db_path, scout_mode=mode)

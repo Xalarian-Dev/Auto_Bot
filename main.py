@@ -9,6 +9,7 @@ Usage:
     python main.py --mode A --dry-run    # Fetch only, no DB write, no scoring
     python main.py --top                 # Display top listings from DB
     python main.py --stats               # Show DB statistics
+    python main.py --reset-failed-scores # Put old "0 by error" listings back to unscored
 """
 
 from __future__ import annotations
@@ -90,6 +91,14 @@ def cmd_stats(args: argparse.Namespace) -> None:
         console.print(f"    Avg score: {stats['avg_score']}")
 
 
+def cmd_reset_failed_scores(args: argparse.Namespace) -> None:
+    from scout.db import reset_failed_scores
+    db_path = os.getenv("DB_PATH", "data/scout.db")
+    count = reset_failed_scores(db_path)
+    console.print(f"[green]{count} listing(s) put back to unscored.[/] "
+                  "They will be scored at the next run.")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Auto_Bot - Job Research Scout Agent",
@@ -110,6 +119,9 @@ def main() -> None:
                         help="Display top listings from DB without fetching")
     parser.add_argument("--stats", action="store_true",
                         help="Show DB statistics")
+    parser.add_argument("--reset-failed-scores", action="store_true",
+                        help="Put back to unscored the listings saved with 0 after a scoring "
+                             "error (they are then re-scored at the next run)")
     parser.add_argument("--min-score", type=int, default=60,
                         help="Minimum score to display (default: 60)")
     parser.add_argument("--verbose", "-v", action="store_true",
@@ -118,7 +130,9 @@ def main() -> None:
     args = parser.parse_args()
     setup_logging(args.verbose)
 
-    if args.stats:
+    if args.reset_failed_scores:
+        cmd_reset_failed_scores(args)
+    elif args.stats:
         cmd_stats(args)
     elif args.top:
         cmd_top(args)

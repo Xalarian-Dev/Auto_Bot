@@ -109,16 +109,43 @@ def update_score(fingerprint: str, score: int, notes: str, relocation_friendly: 
             session.commit()
 
 
+def reset_failed_scores(db_path: str = "data/scout.db") -> int:
+    """
+    Put back to "unscored" (NULL) the old listings that were saved with a score
+    of 0 only because scoring had failed. Returns the number of rows reset.
+    Safe to run several times: a second run finds nothing to change.
+    Real 0 scores (with a normal explanation) are left untouched.
+    """
+    engine = get_engine(db_path)
+    with Session(engine) as session:
+        rows = session.scalars(
+            select(JobListingORM)
+            .where(JobListingORM.relevance_score == 0)
+            .where(
+                JobListingORM.relevance_notes.like("Scoring error%")
+                | JobListingORM.relevance_notes.like("Scorer returned no result%")
+            )
+        ).all()
+        for row in rows:
+            row.relevance_score = None
+            row.relevance_notes = None
+            row.is_relocation_friendly = None
+        session.commit()
+        return len(rows)
+
+
 # ---------------------------------------------------------------------------
 # Read operations
 # ---------------------------------------------------------------------------
 
-def get_unscored(db_path: str = "data/scout.db") -> list[JobListingORM]:
+def get_unscored(db_path: str = "data/scout.db",
+                 scout_mode: str | None = None) -> list[JobListingORM]:
     engine = get_engine(db_path)
     with Session(engine) as session:
-        return list(session.scalars(
-            select(JobListingORM).where(JobListingORM.relevance_score.is_(None))
-        ).all())
+        q = select(JobListingORM).where(JobListingORM.relevance_score.is_(None))
+        if scout_mode:
+            q = q.where(JobListingORM.scout_mode == scout_mode)
+        return list(session.scalars(q).all())
 
 
 def get_top_listings(min_score: int = 60, limit: int = 50,

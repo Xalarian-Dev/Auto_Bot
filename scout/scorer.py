@@ -63,8 +63,12 @@ class Scorer:
         self.client = anthropic.Anthropic(api_key=api_key)
         self.model = model  # Haiku for cost efficiency at scale
 
-    def score(self, listing: JobListing) -> ScorerResult:
-        """Score a single job listing. Returns a ScorerResult."""
+    def score(self, listing: JobListing) -> ScorerResult | None:
+        """Score a single job listing.
+
+        Returns a ScorerResult, or None if scoring failed (network error, API
+        error, no result). A failure must never be stored as a score of 0.
+        """
         user_message = self._build_message(listing)
 
         try:
@@ -88,14 +92,17 @@ class Scorer:
                     )
 
             logger.warning(f"[scorer] no tool_use block for: {listing.title}")
-            return ScorerResult(score=0, is_relocation_friendly=False, notes="Scorer returned no result.")
+            return None
 
         except Exception as exc:
             logger.error(f"[scorer] failed for '{listing.title}': {exc}")
-            return ScorerResult(score=0, is_relocation_friendly=False, notes=f"Scoring error: {exc}")
+            return None
 
-    def score_batch(self, listings: list[JobListing]) -> list[tuple[JobListing, ScorerResult]]:
-        """Score a batch of listings sequentially (API rate limit friendly)."""
+    def score_batch(self, listings: list[JobListing]) -> list[tuple[JobListing, ScorerResult | None]]:
+        """Score a batch of listings sequentially (API rate limit friendly).
+
+        The result is None for a listing whose scoring failed.
+        """
         results = []
         for i, listing in enumerate(listings, 1):
             logger.info(f"[scorer] scoring {i}/{len(listings)}: {listing.title} @ {listing.company}")
