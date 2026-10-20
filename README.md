@@ -23,6 +23,11 @@ cp assets/candidate.yaml.example assets/candidate.yaml
 .venv/Scripts/python.exe main.py --top             # Show top listings (all modes)
 .venv/Scripts/python.exe main.py --top --mode A    # Show top listings for one mode
 .venv/Scripts/python.exe main.py --stats           # DB statistics per mode
+.venv/Scripts/python.exe main.py --reset-failed-scores  # Put old "0 by error" listings back to unscored
+
+# Listings that are "unscored" are scored again at every run.
+# --reset-failed-scores puts back to unscored the listings saved with a 0 after a
+# scoring error, so the next run re-scores them. Tip: copy data/scout.db first.
 
 # Launch the dashboard
 launch.bat
@@ -65,7 +70,7 @@ Use the **Mode Editor** tab in the dashboard to edit visually — saves and rege
 | Key | Usage | Get it |
 |-----|-------|--------|
 | `ANTHROPIC_API_KEY` | Claude Haiku scorer + Claude Sonnet drafter | console.anthropic.com |
-| `SERPAPI_KEY` | Google Jobs aggregator (see below) | serpapi.com — free tier: 250 searches/month |
+| `SERPAPI_KEY` | Google Jobs aggregator (see below) | serpapi.com — free tier: limit to check on serpapi.com |
 | `USAJOBS_KEY` | USAJobs.gov API | developer.usajobs.gov — free registration |
 | `USAJOBS_EMAIL` | USAJobs.gov API (User-Agent header) | Same registration as above |
 
@@ -76,7 +81,7 @@ Use the **Mode Editor** tab in the dashboard to edit visually — saves and rege
 SerpAPI is a paid service that queries Google Jobs and returns structured JSON results.
 Google Jobs aggregates listings from LinkedIn, Indeed, Glassdoor, Seek, and hundreds of other boards — making SerpAPI the single highest-value source in this project.
 
-- Free tier: 250 searches/month (enough for occasional runs)
+- Free tier: monthly search limit to check on serpapi.com (`.env.example` and this file used to disagree: 250 vs 100)
 - Paid plans start at $50/month for 5,000 searches
 - Register and get your key at: https://serpapi.com/
 - **Optional** — if no key is configured, SerpAPI and Indeed EU sources are silently skipped. All other sources still work.
@@ -267,7 +272,7 @@ Generates a tailored cover letter and resume talking points for any job in the d
 1. Copy `assets/candidate.yaml.example` → `assets/candidate.yaml` and fill in your details
 2. Place your resume PDF in `assets/` (any filename, first PDF found is used)
 3. Copy `.env.example` → `.env` and add your API keys
-3. Open the **Mode Editor** in the dashboard to set your target keywords, locations, and sources
-4. Run the scout
+4. Open the **Mode Editor** in the dashboard to set your target keywords, locations, and sources
+5. Run the scout
 
 No Python code changes needed.
