@@ -6,6 +6,7 @@ Each source must implement fetch() and return a list of JobListing objects.
 from __future__ import annotations
 
 import logging
+import re
 from abc import ABC, abstractmethod
 from typing import Any
 
@@ -28,7 +29,6 @@ COUNTRY_REGION: dict[str, Region] = {
     "south korea": Region.APAC,
     "korea": Region.APAC,
     "malaysia": Region.APAC,
-    "thailand": Region.APAC,
     "philippines": Region.APAC,
     "indonesia": Region.APAC,
     "vietnam": Region.APAC,
@@ -45,10 +45,18 @@ COUNTRY_REGION: dict[str, Region] = {
 }
 
 
+# Codes courts : à chercher comme mots entiers seulement, sinon « us » est trouvé dans
+# « Vienna, Austria » ou « Cyprus ».
+_WHOLE_WORD_KEYS = {"us", "usa"}
+
+
 def infer_region(country: str, location: str) -> Region:
     text = (country + " " + location).lower()
     for key, region in COUNTRY_REGION.items():
-        if key in text:
+        if key in _WHOLE_WORD_KEYS:
+            if re.search(rf"\b{re.escape(key)}\b", text):
+                return region
+        elif key in text:
             return region
     return Region.OTHER
 
