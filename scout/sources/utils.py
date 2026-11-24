@@ -4,7 +4,10 @@ Shared utilities for job sources.
 
 from __future__ import annotations
 
+import re
 from datetime import datetime, timedelta
+
+import httpx
 
 
 _AGO_MAP = {
@@ -32,3 +35,17 @@ def parse_posted_at(text: str | None) -> datetime | None:
             except ValueError:
                 return None
     return None
+
+
+def describe_error(exc: Exception) -> str:
+    """Short, safe description of a request error, for logs.
+
+    The text of an httpx error contains the full URL of the request, and SerpAPI
+    receives its key in that URL (``api_key=...``). Never log ``str(exc)`` as is:
+    for an HTTP error, keep only the status code and reason; otherwise, mask any
+    ``api_key`` value left in the message.
+    """
+    if isinstance(exc, httpx.HTTPStatusError):
+        return f"HTTP {exc.response.status_code} {exc.response.reason_phrase}".strip()
+    text = re.sub(r"(api_key=)[^&\s'\"]+", r"\1***", str(exc))
+    return f"{type(exc).__name__}: {text}" if text else type(exc).__name__

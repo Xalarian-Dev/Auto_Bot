@@ -10,7 +10,7 @@ import logging
 import os
 from scout.models import JobListing, Region
 from scout.sources.base import BaseSource, infer_region
-from scout.sources.utils import parse_posted_at
+from scout.sources.utils import describe_error, parse_posted_at
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +55,7 @@ class IndeedSource(BaseSource):
                     resp = self._get(client, SERPAPI_BASE, params=params)
                     data = resp.json()
                 except Exception as exc:
-                    logger.warning(f"[indeed] '{q}' @ '{location}' failed: {exc}")
+                    logger.warning(f"[indeed] '{q}' @ '{location}' failed: {describe_error(exc)}")
                     continue
 
                 jobs = data.get("jobs_results", [])
