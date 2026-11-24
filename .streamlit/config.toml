@@ -1,0 +1,7 @@
+# Réglages du tableau de bord Streamlit (lu au lancement depuis la racine du projet,
+# par launch.bat comme par le lancement manuel « streamlit run app.py »).
+
+[server]
+# Tableau de bord accessible depuis ce seul ordinateur (http://localhost:8501),
+# jamais depuis les autres machines du réseau (Wi-Fi partagé...). Ticket #28.
+address = "localhost"
