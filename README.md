@@ -34,6 +34,8 @@ launch.bat
 # or manually: .venv/Scripts/streamlit run app.py
 ```
 
+The dashboard only answers on this computer (http://localhost:8501), not on the other machines of the network (shared Wi-Fi): see `.streamlit/config.toml` (`server.address = "localhost"`). Launch it from the project folder so this setting is read.
+
 ---
 
 ## Setup
